@@ -39,7 +39,7 @@ export const placeBuyOrder = async ({
 
 export const getOwner = async (): Promise<string> => {
   const { to, data } = await getFunction("nextOrderId");
-  const result = await publicClient().call({ to, data });
+  const result = await publicClient().call({ to, data }) as unknown;
   return result as string;
 };
 
@@ -206,7 +206,7 @@ export const getOwn = async () => {
 
   if (!response.data) throw new Error("No data found");
 
-  const bytes = new Uint8Array(response.data);
+  const bytes = new Uint8Array(response.data) as Uint8Array;
   const addressBytes = bytes.slice(12); // last 20 bytes
   const hex = "0x" + Buffer.from(addressBytes).toString("hex");
 
@@ -219,7 +219,7 @@ export async function getUint256(functionName: string) {
 
   if (!response.data) throw new Error("No data found");
 
-  const bytes = new Uint8Array(response.data);
+  const bytes = new Uint8Array(response.data) as Uint8Array
   return toBigInt(bytes);
 }
 
@@ -234,7 +234,7 @@ export async function getBuyOrder(index: bigint, ) {
   console.log("Called Buyorde ")
   console.log(response)
   if (!response.data) throw new Error("No data found");
-  const bytes = new Uint8Array(response.data);
+  const bytes = new Uint8Array(response.data) as Uint8Array
   console.log(bytes)
   const result = decodeFunctionResult({
     abi: abi,
@@ -261,14 +261,14 @@ export async function getActiveBuyOrders() {
   console.log("Called getactive buy")
   if (!response.data) throw new Error("No data returned");
 
-  const bytes = new Uint8Array(response.data);
+  const bytes = new Uint8Array(response.data) as Uint8Array
   
 
   const result = decodeFunctionResult({
     abi: abi,
     functionName: "getActiveBuyOrders",
     data: bytes,
-  });
+  }) as any;
   console.log(result)
     console.log(result[0])
   return result.map((order:any) => ({
@@ -292,13 +292,13 @@ export async function getActiveSellOrders() {
   console.log(response)
   console.log("Called getactive sell")
   if (!response.data) throw new Error("No data returned");
-  const bytes = new Uint8Array(response.data);
+  const bytes = new Uint8Array(response.data) as Uint8Array;
 
   const result = decodeFunctionResult({
     abi: abi,
     functionName: "getActiveSellOrders",
     data: bytes,
-  });
+  }) as any;
 
   return result.map((order:any) => ({
     trader: order.trader,
@@ -318,12 +318,12 @@ export async function getRecentTrades(limit: bigint) {
   const response = await publicClient().call({ to, data });
   console.log(response)
   if (!response.data) throw new Error("No data returned");
-  const bytes = new Uint8Array(response.data);
+  const bytes = new Uint8Array(response.data) as Uint8Array;
   const result = decodeFunctionResult({
     abi: abi,
     functionName: "getRecentTrades",
     data: bytes,
-  });
+  }) as any;
 
   return result.map((trade:any) => ({
     buyer: trade.buyer,
@@ -341,12 +341,11 @@ export async function getStatistics() {
   const response = await publicClient().call({ to, data });
   console.log(response)
   if (!response.data) throw new Error("No data returned");
-  const bytes = new Uint8Array(response.data);
-  const [activeBuy, activeSell, totalTrades, volume] = decodeFunctionResult({
+  const bytes = new Uint8Array(response.data) as Uint8Array;  const [activeBuy, activeSell, totalTrades, volume] = decodeFunctionResult({
     abi: abi,
     functionName: "getStatistics",
     data: bytes
-  });
+  }) as any;
 
   return {
     activeBuyOrders: BigInt(activeBuy),

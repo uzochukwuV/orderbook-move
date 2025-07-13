@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Coins, RefreshCcw, ArrowUpRight } from 'lucide-react';
 
 import { getUserBalance, mintERC20 } from '../services/blockchain.services';
