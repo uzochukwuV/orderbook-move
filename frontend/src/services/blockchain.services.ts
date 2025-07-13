@@ -234,7 +234,7 @@ export async function getBuyOrder(index: bigint, ) {
   console.log("Called Buyorde ")
   console.log(response)
   if (!response.data) throw new Error("No data found");
-  const bytes = new Uint8Array(response.data) as Uint8Array
+  const bytes = new Uint8Array(response.data) as any
   console.log(bytes)
   const result = decodeFunctionResult({
     abi: abi,
@@ -261,13 +261,15 @@ export async function getActiveBuyOrders() {
   console.log("Called getactive buy")
   if (!response.data) throw new Error("No data returned");
 
-  const bytes = new Uint8Array(response.data) as Uint8Array
+  // @ts-ignore
+  const bytes = new Uint8Array(response.data) as any
   
 
   const result = decodeFunctionResult({
     abi: abi,
     functionName: "getActiveBuyOrders",
-    data: bytes,
+    // @ts-ignore
+    data: bytes as any,
   }) as any;
   console.log(result)
     console.log(result[0])
@@ -292,12 +294,13 @@ export async function getActiveSellOrders() {
   console.log(response)
   console.log("Called getactive sell")
   if (!response.data) throw new Error("No data returned");
-  const bytes = new Uint8Array(response.data) as Uint8Array;
+  // @ts-ignore
+  const bytes = new Uint8Array(response.data) as any;
 
   const result = decodeFunctionResult({
     abi: abi,
     functionName: "getActiveSellOrders",
-    data: bytes,
+    data: bytes as any,
   }) as any;
 
   return result.map((order:any) => ({
@@ -318,11 +321,13 @@ export async function getRecentTrades(limit: bigint) {
   const response = await publicClient().call({ to, data });
   console.log(response)
   if (!response.data) throw new Error("No data returned");
-  const bytes = new Uint8Array(response.data) as Uint8Array;
+  // @ts-ignore
+  const bytes = new Uint8Array(response.data) as any; 
   const result = decodeFunctionResult({
     abi: abi,
     functionName: "getRecentTrades",
-    data: bytes,
+    // @ts-ignore
+    data: bytes as any,
   }) as any;
 
   return result.map((trade:any) => ({
@@ -341,10 +346,12 @@ export async function getStatistics() {
   const response = await publicClient().call({ to, data });
   console.log(response)
   if (!response.data) throw new Error("No data returned");
-  const bytes = new Uint8Array(response.data) as Uint8Array;  const [activeBuy, activeSell, totalTrades, volume] = decodeFunctionResult({
+  // @ts-ignore
+  const bytes = new Uint8Array(response.data) as Uint8Array; 
+   const [activeBuy, activeSell, totalTrades, volume] = decodeFunctionResult({
     abi: abi,
     functionName: "getStatistics",
-    data: bytes
+    data: bytes as any
   }) as any;
 
   return {
