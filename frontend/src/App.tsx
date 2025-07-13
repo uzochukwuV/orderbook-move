@@ -10,6 +10,7 @@ import { RefreshCw, Settings, HelpCircle } from 'lucide-react';
 import './App.css';
 import { CONTRACT_ADDRESS } from './utils/constants';
 import { getOwn, getOwner } from './services/blockchain.services';
+import TokenMintAndBalance from './component/TokenMintAndBalance';
 
 function App() {
   const {
@@ -57,7 +58,7 @@ function App() {
             <Settings className="w-8 h-8 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-foreground mb-2">Move OrderBook</h1>
+            <h1 className="text-3xl font-bold text-foreground mb-2">Umi OrderBook</h1>
             <p className="text-muted-foreground mb-6">
               Connect your wallet to start trading on the decentralized order book
             </p>
@@ -136,6 +137,7 @@ function App() {
               loading={loading}
               account={account}
             />
+            
           </div>
 
           {/* Trade History */}
@@ -144,13 +146,22 @@ function App() {
               recentTrades={recentTrades}
               loading={loading}
             />
+
+            <div className="space-y-6">
+            <TokenMintAndBalance
+             account={account}
+            />
           </div>
+          </div>
+
+          
+
         </div>
 
         {/* Footer */}
         <footer className="mt-12 py-6 border-t border-border">
           <div className="text-center text-sm text-muted-foreground">
-            <p>Move OrderBook DApp - Decentralized Trading Platform</p>
+            <p>Umi OrderBook DApp - Decentralized Trading Platform</p>
             <p className="mt-1">Built with Move smart contracts and React</p>
           </div>
         </footer>

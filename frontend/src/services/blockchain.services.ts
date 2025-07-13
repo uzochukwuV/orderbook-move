@@ -160,6 +160,45 @@ export const approveERC20 = async ({
   revertOnError(tx);
 }
 
+export const mintERC20 = async ({
+  erc20,
+  user,
+  amount
+}:{
+  erc20:string,
+  user:string,
+  amount: number 
+}) =>{
+  const scaledAmount = BigInt(Math.trunc(amount * 1e18));
+  const {to, data} = await getFunctionERC20("mint", erc20, user, scaledAmount)
+   const hash = await walletClient().sendTransaction({
+    account: await getAccount(),
+    to,
+    data,
+  });
+
+  const tx = await publicClient().waitForTransactionReceipt({ hash });
+  revertOnError(tx);
+}
+
+
+export const getUserBalance = async (
+  account: `0x${string}`,
+  token: `0x${string}`
+): Promise<number> => {
+  let userBalance = 0;
+
+  if (token === ethers.ZeroAddress) {
+    const client = publicClient();
+    const balance = await client.getBalance({
+      address: account,
+    });
+    userBalance = Number(balance) / 10 ** 18;
+  }
+
+  return userBalance;
+};
+
 import { getAddress } from "viem";
 
 export const getOwn = async () => {
