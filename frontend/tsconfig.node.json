@@ -21,7 +21,7 @@
      "noUnusedLocals": false,
     "noImplicitAny": false,
     "strict": false,
-    "suppressImplicitAnyIndexErrors": true
+    
   },
   "include": ["vite.config.ts"]
 }

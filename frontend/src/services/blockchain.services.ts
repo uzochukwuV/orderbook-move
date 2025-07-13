@@ -206,7 +206,7 @@ export const getOwn = async () => {
 
   if (!response.data) throw new Error("No data found");
 
-  const bytes = new Uint8Array(response.data) as Uint8Array;
+  const bytes =response.data
   const addressBytes = bytes.slice(12); // last 20 bytes
   const hex = "0x" + Buffer.from(addressBytes).toString("hex");
 
@@ -219,7 +219,7 @@ export async function getUint256(functionName: string) {
 
   if (!response.data) throw new Error("No data found");
 
-  const bytes = new Uint8Array(response.data) as Uint8Array
+  const bytes = response.data
   return toBigInt(bytes);
 }
 
@@ -239,8 +239,8 @@ export async function getBuyOrder(index: bigint, ) {
   const result = decodeFunctionResult({
     abi: abi,
     functionName: "getBuyOrder",
-    data: bytes
-  });
+    data: bytes as any
+  }) as any;
   console.log(result)
 
   const [order] = result;
