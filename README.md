@@ -1,69 +1,115 @@
-# **Interest-Free P2P Lending Protocol**
-
-## **Overview**
-
-This is a decentralized protocol built on the **Umi** blockchain, offering **interest-free loans** backed by collateral. Inspired by the **Liquity** protocol, our goal is to provide a stable and decentralized way for users to borrow funds without the burden of interest rates, using a **collateralized debt position (CDP)** model.
-
-### **Problem Statement**
-
-Traditional lending often involves high interest rates, adding significant financial strain on borrowers. This protocol aims to provide a better alternative by offering **interest-free loans** while maintaining protocol stability through a **collateralized** mechanism.
+Here’s a clean and professional `README.md` description for your **UmiOrderBook DApp** project:
 
 ---
 
-## **How It Works**
+# 📈 Umi OrderBook DApp
 
-The protocol enables users to **borrow stablecoins** without paying interest by locking collateral. The loan is secured by the collateral, and if the value of the collateral falls below a set threshold, it can be liquidated to repay the loan. This ensures that the protocol remains solvent without charging interest to borrowers.
-
-### **Core Features**
-
-- **Interest-Free Loans**: Loans are offered without interest, relying on collateral to secure the loan value.
-- **Collateralized Debt Positions (CDPs)**: Users lock collateral to take out loans. The collateral value must exceed the loan amount by a predetermined ratio (e.g., 110%).
-- **Liquidation Mechanism**: If the collateral value drops below the required threshold, it is liquidated to repay the loan.
-- **Stability Pool**: A reserve pool that absorbs liquidated collateral to maintain the protocol's stability.
+A decentralized, transparent, and efficient on-chain order book system built for trading ERC-20 tokens. This DApp enables users to place buy and sell orders, view live order books, and track trade history — all directly on the blockchain.
 
 ---
 
-## **How to Use**
+## 🛠️ Features
 
-### **For Borrowers**
+* 🧾 **Fully on-chain order book**
+  No off-chain relayers — all buy/sell orders are stored and matched on-chain for full transparency.
 
-1. Deposit collateral (e.g., ETH) to secure a loan.
-2. Specify the amount you wish to borrow (in stablecoins).
-3. Borrow funds at no interest, ensuring your collateral remains above the required ratio.
-4. Repay the loan when ready to unlock your collateral.
+* 🛒 **Limit order support**
+  Users can place, cancel, and match limit buy/sell orders.
 
-### **For Lenders**
+* 🔍 **Live market data**
+  View active buy/sell orders and recent trade history in real time.
 
-1. Provide collateral to the **Stability Pool**.
-2. Earn rewards through **liquidation fees** or other incentives for participating in the protocol.
-3. Help maintain protocol stability by absorbing collateral when borrowers fail to maintain collateral ratios.
+* 📊 **Statistics dashboard**
+  Track total trades, volumes, and active orders.
 
----
-
-## **Future Improvements**
-
-- **Governance**: Introduce decentralized governance to allow users to vote on protocol changes (e.g., adjusting collateral ratios).
-- **Interest-free Loan Modifications**: Implement more advanced mechanisms to reduce liquidation risks, such as multiple collateral types or a dynamic collateral ratio.
-- **Collateralized Token**: Introduce a new collateral-backed token for additional stability.
+* 🔐 **Non-custodial**
+  You retain control of your tokens — all trades are executed via smart contracts.
 
 ---
 
-## **Contributing**
+## 🧱 Built With
 
-We welcome contributions! If you’d like to contribute to this project, please fork the repository and submit a pull request.
-
-1. Fork the repository
-2. Create a new branch for your changes
-3. Make your changes
-4. Submit a pull request
-
-## **License**
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+* **Solidity / Move (Umi-compatible)** – for the core smart contract logic
+* **Hardhat + Ethers.js / Viem** – for testing and deployment
+* **React + TypeScript** – for the frontend interface
+* **Umi Network** – for deploying and interacting with Move-powered EVM contracts
 
 ---
 
-## **Acknowledgments**
+## ⚙️ Core Smart Contracts
 
-- Inspired by **Liquity Protocol** (interest-free loan model).
-- Built using **Umi** and **Ink!** for decentralized smart contracts.
+* `OrderBook.sol`:
+  Handles storage and management of buy/sell orders and trade execution.
+
+* `ERC20Token.sol`:
+  A sample token used for testing trades.
+
+---
+
+## 🔧 Key Functions
+
+| Function                                  | Description                      |
+| ----------------------------------------- | -------------------------------- |
+| `placeBuyOrder(uint amount, uint price)`  | Submit a buy order               |
+| `placeSellOrder(uint amount, uint price)` | Submit a sell order              |
+| `matchOrders()`                           | Match compatible buy/sell orders |
+| `getBuyOrdersCount()`                     | Get total buy orders             |
+| `getActiveBuyOrders()`                    | View all active buy orders       |
+| `getTrade(uint index)`                    | View a specific trade            |
+| `getStatistics()`                         | Get summary metrics              |
+
+---
+
+## 🚀 Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Compile smart contracts
+npx hardhat compile
+
+# Run tests
+npx hardhat test
+
+# Deploy to Umi testnet (update network config)
+npx hardhat run scripts/deploy.ts --network umi
+```
+
+---
+
+## 🌐 Frontend (React)
+
+```bash
+cd frontend
+
+# Install deps
+npm install
+
+# Run development server
+npm run dev
+```
+
+---
+
+## 🔐 Security & Limitations
+
+* Currently supports basic limit order matching (price-time priority)
+* No automated market maker (AMM) or slippage protection yet
+* Consider adding signature-based order placement for gasless orders in future
+
+---
+
+## 📄 License
+
+MIT © 2025 YourName
+
+---
+
+Let me know if you’d like to:
+
+* Include images/screenshots
+* Add badges (e.g. build status, license)
+* Include a section for contributors, APIs, or advanced usage
+
+I can also auto-generate the README file for you.
