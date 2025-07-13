@@ -13,7 +13,7 @@ const TokenMintAndBalance = ({account}:{account:string}) => {
   const [userAddress, setUserAddress] = useState<any>(account)
   const [tokenAddress, settokenAddress] = useState<any>(MOCK_USDC)
 
-   const formatEth = (price) => {
+   const formatEth = (price:any) => {
     return (parseFloat(price)/ 10**18).toString();
   };
 

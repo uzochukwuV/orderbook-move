@@ -1,12 +1,12 @@
-import React from 'react';
+
 import { Activity, Clock, TrendingUp, TrendingDown } from 'lucide-react';
 
-const TradeHistory = ({ recentTrades, loading }) => {
-  const formatPrice = (price) => {
+const TradeHistory = ({ recentTrades, loading }:any) => {
+  const formatPrice = (price:any) => {
     return parseFloat(price).toFixed(6);
   };
 
-  const TradeRow = ({ trade }) => (
+  const TradeRow = ({ trade }:any) => (
     <tr className="hover:bg-card/50 transition-colors">
       <td className="px-3 py-3">
         <div className="flex items-center space-x-2">
@@ -59,7 +59,7 @@ const TradeHistory = ({ recentTrades, loading }) => {
 
   const LoadingRow = () => (
     <tr>
-      <td colSpan="6" className="px-3 py-8">
+      <td colSpan={6} className="px-3 py-8">
         <div className="flex items-center justify-center space-x-2 text-muted-foreground">
           <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
           <span>Loading trades...</span>
@@ -70,7 +70,7 @@ const TradeHistory = ({ recentTrades, loading }) => {
 
   const EmptyRow = () => (
     <tr>
-      <td colSpan="6" className="px-3 py-8 text-center text-muted-foreground">
+      <td colSpan={6} className="px-3 py-8 text-center text-muted-foreground">
         No trades executed yet
       </td>
     </tr>
@@ -103,7 +103,7 @@ const TradeHistory = ({ recentTrades, loading }) => {
             ) : recentTrades.length === 0 ? (
               <EmptyRow />
             ) : (
-              recentTrades.map((trade) => (
+              recentTrades.map((trade:any) => (
                 <TradeRow key={trade.id} trade={trade} />
               ))
             )}

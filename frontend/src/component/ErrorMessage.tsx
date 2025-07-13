@@ -1,7 +1,7 @@
-import React from 'react';
+
 import { AlertCircle, X } from 'lucide-react';
 
-const ErrorMessage = ({ error, onDismiss }) => {
+const ErrorMessage = ({ error, onDismiss }:any) => {
   if (!error) return null;
 
   return (

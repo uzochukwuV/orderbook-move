@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useOrderBook } from './hooks/useOrderbook';
 import Header from './component/Header';
 import TradingForm from './component/TradingForm';
 import OrderBook from './component/OrderBook';
 import TradeHistory from './component/TradeHistory';
-import LoadingSpinner from './components/LoadingSpinner';
+
 import ErrorMessage from './component/ErrorMessage';
 import { RefreshCw, Settings, HelpCircle } from 'lucide-react';
 import './App.css';
 import { CONTRACT_ADDRESS } from './utils/constants';
-import { getOwn, getOwner } from './services/blockchain.services';
+import { getOwn } from './services/blockchain.services';
 import TokenMintAndBalance from './component/TokenMintAndBalance';
 
 function App() {
@@ -43,7 +43,8 @@ function App() {
   const handleInitializeOrderBook = async () => {
     try {
       const owner = await getOwn();
-      console.log(owner, "this is the owner")
+      const init = await initializeOrderBook()
+      console.log(owner,init, "this is the owner")
       alert('Order book initialized successfully!');
     } catch (error) {
       console.error('Failed to initialize order book:', error);
@@ -87,7 +88,7 @@ function App() {
       />
       
       <main className="container mx-auto px-4 py-6">
-        <ErrorMessage error={error} />
+        <ErrorMessage error={error} onDismiss={null} />
         
         {/* Action Bar */}
         <div className="flex items-center justify-between mb-6">

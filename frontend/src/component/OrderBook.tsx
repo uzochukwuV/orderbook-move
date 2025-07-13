@@ -2,25 +2,25 @@ import React from 'react';
 import { X, Clock, User } from 'lucide-react';
 
 
-const OrderBook = ({ buyOrders, sellOrders, onCancelOrder, loading, account }) => {
+const OrderBook = ({ buyOrders, sellOrders, onCancelOrder, loading, account }:any) => {
   console.log(buyOrders)
-  const formatPrice = (price) => {
+  const formatPrice = (price:any) => {
     return (parseFloat(price)).toFixed(6);
   };
 
-  const formatEth = (price) => {
+  const formatEth = (price:any) => {
     return (parseFloat(price)/ 10**18);
   };
 
    
 
-  const isMyOrder = (orderTrader) => {
+  const isMyOrder = (orderTrader:any) => {
     if (!account) return false;
     const shortAccount = `${account.slice(0, 8)}...${account.slice(-8)}`;
     return orderTrader === shortAccount;
   };
 
-  const OrderRow = ({ order, type, onCancel }) => (
+  const OrderRow = ({ order, type, onCancel }:any) => (
     <tr className={`hover:bg-card/50 transition-colors ${type === 'buy' ? 'buy-order' : 'sell-order'}`}>
       <td className="px-3 py-2 text-sm">
         <span className={`font-mono ${type === 'buy' ? 'text-primary' : 'text-destructive'}`}>
@@ -71,7 +71,7 @@ const OrderBook = ({ buyOrders, sellOrders, onCancelOrder, loading, account }) =
 
   const LoadingRow = () => (
     <tr>
-      <td colSpan="6" className="px-3 py-8">
+      <td colSpan={6} className="px-3 py-8">
         <div className="flex items-center justify-center space-x-2 text-muted-foreground">
           <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
           <span>Loading orders...</span>
@@ -80,9 +80,9 @@ const OrderBook = ({ buyOrders, sellOrders, onCancelOrder, loading, account }) =
     </tr>
   );
 
-  const EmptyRow = ({ message }) => (
+  const EmptyRow = ({ message }:any) => (
     <tr>
-      <td colSpan="6" className="px-3 py-8 text-center text-muted-foreground">
+      <td colSpan={6} className="px-3 py-8 text-center text-muted-foreground">
         {message}
       </td>
     </tr>
@@ -117,7 +117,7 @@ const OrderBook = ({ buyOrders, sellOrders, onCancelOrder, loading, account }) =
               ) : buyOrders.length === 0 ? (
                 <EmptyRow message="No buy orders available" />
               ) : (
-                buyOrders.map((order) => (
+                buyOrders.map((order:any) => (
                   <OrderRow
                     key={order.id}
                     order={order}
@@ -158,7 +158,7 @@ const OrderBook = ({ buyOrders, sellOrders, onCancelOrder, loading, account }) =
               ) : sellOrders.length === 0 ? (
                 <EmptyRow message="No sell orders available" />
               ) : (
-                sellOrders.map((order) => (
+                sellOrders.map((order:any) => (
                   <OrderRow
                     key={order.id}
                     order={order}

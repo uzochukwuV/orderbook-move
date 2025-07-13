@@ -1,4 +1,3 @@
-import React from 'react';
 
 const LoadingSpinner = ({ size = 'md', text = 'Loading...' }) => {
   const sizeClasses = {
@@ -10,7 +9,7 @@ const LoadingSpinner = ({ size = 'md', text = 'Loading...' }) => {
 
   return (
     <div className="flex flex-col items-center justify-center space-y-3 py-8">
-      <div className={`${sizeClasses[size]} border-2 border-primary border-t-transparent rounded-full animate-spin`}></div>
+      <div className={`${sizeClasses[size as "md"]} border-2 border-primary border-t-transparent rounded-full animate-spin`}></div>
       {text && (
         <p className="text-sm text-muted-foreground animate-pulse">{text}</p>
       )}

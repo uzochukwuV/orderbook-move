@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { TrendingUp, TrendingDown, Loader2 } from 'lucide-react';
 
-const TradingForm = ({ onPlaceBuyOrder, onPlaceSellOrder, loading }) => {
+const TradingForm = ({ onPlaceBuyOrder, onPlaceSellOrder, loading }:any) => {
   const [buyPrice, setBuyPrice] = useState('');
   const [buyAmount, setBuyAmount] = useState('');
   const [sellPrice, setSellPrice] = useState('');
   const [sellAmount, setSellAmount] = useState('');
 
-  const handleBuyOrder = async (e) => {
+  const handleBuyOrder = async (e:any) => {
     e.preventDefault();
     if (!buyPrice || !buyAmount) return;
     console.log(parseFloat(buyPrice), parseInt(buyAmount))
@@ -20,7 +20,7 @@ const TradingForm = ({ onPlaceBuyOrder, onPlaceSellOrder, loading }) => {
     }
   };
 
-  const handleSellOrder = async (e) => {
+  const handleSellOrder = async (e:any) => {
     e.preventDefault();
     if (!sellPrice || !sellAmount) return;
     

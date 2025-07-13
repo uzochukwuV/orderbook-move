@@ -3,7 +3,6 @@ import {
   getFunction,
   publicClient,
   walletClient,
-  orderbookInterface,
   umixInterface,
   getFunctionERC20,
 } from "../utils/config";
@@ -22,7 +21,7 @@ export const placeBuyOrder = async ({
 }) => {
   const scaledPrice = BigInt(Math.trunc(price * 1e6));
   const scaledAmount = BigInt(Math.trunc(amount * 1e18));
-  const totalQuote = (scaledAmount * scaledPrice) / 1_000_000n;
+  // const totalQuote = (scaledAmount * scaledPrice) / 1_000_000n;
 
   await approveERC20({erc20:quote_coin, amount})
   const { to, data } = await getFunction("placeBuyOrder", scaledPrice, scaledAmount);
@@ -225,7 +224,7 @@ export async function getUint256(functionName: string) {
 }
 
 
-import { decodeFunctionResult, encodeFunctionData } from 'viem';
+import { decodeFunctionResult } from 'viem';
 
 export async function getBuyOrder(index: bigint, ) {
   const { to, data } = await getFunction("getBuyOrder", index);
@@ -272,7 +271,7 @@ export async function getActiveBuyOrders() {
   });
   console.log(result)
     console.log(result[0])
-  return result.map(order => ({
+  return result.map((order:any) => ({
     trader: order.trader,
     amount: BigInt(order.amount),
     price: BigInt(order.price),
@@ -301,7 +300,7 @@ export async function getActiveSellOrders() {
     data: bytes,
   });
 
-  return result.map(order => ({
+  return result.map((order:any) => ({
     trader: order.trader,
     amount: BigInt(order.amount),
     price: BigInt(order.price),
@@ -326,7 +325,7 @@ export async function getRecentTrades(limit: bigint) {
     data: bytes,
   });
 
-  return result.map(trade => ({
+  return result.map((trade:any) => ({
     buyer: trade.buyer,
     seller: trade.seller,
     amount: BigInt(trade.amount),
@@ -369,7 +368,7 @@ const revertOnError = (tx: any) => {
       const errorMessage =
         errorData || "Transaction reverted without a message";
       if (errorData) {
-        const fragment = umixInterface.fragments.filter((fragment) => {
+        const fragment = umixInterface.fragments.filter((fragment:any) => {
           return fragment.type === "error";
         });
         console.log({ fragments: fragment });

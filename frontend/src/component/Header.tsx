@@ -1,7 +1,7 @@
-import React from 'react';
+
 import { Wallet, Activity, TrendingUp } from 'lucide-react';
 
-const Header = ({ account, onConnectWallet, statistics }) => {
+const Header = ({ account, onConnectWallet, statistics }:any) => {
   console.log(statistics)
   return (
     <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
@@ -13,7 +13,7 @@ const Header = ({ account, onConnectWallet, statistics }) => {
               <TrendingUp className="w-5 h-5 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground">Move OrderBook</h1>
+              <h1 className="text-xl font-bold text-foreground">Umi OrderBook</h1>
               <p className="text-xs text-muted-foreground">Decentralized Trading Platform</p>
             </div>
           </div>
