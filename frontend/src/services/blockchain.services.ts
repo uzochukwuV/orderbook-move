@@ -234,6 +234,7 @@ export async function getBuyOrder(index: bigint, ) {
   console.log("Called Buyorde ")
   console.log(response)
   if (!response.data) throw new Error("No data found");
+  // @ts-ignore
   const bytes = new Uint8Array(response.data) as any
   console.log(bytes)
   const result = decodeFunctionResult({
